@@ -1,5 +1,6 @@
 import React from "react"
 import {withRouter} from "react-router-dom"
+import {Input} from "semantic-ui-react"
 class Login extends  React.Component{
     constructor(props){
         super(props);
@@ -13,8 +14,8 @@ class Login extends  React.Component{
         fetch(`http://localhost:3000/login?userName=${userAccount}&passWord=${passWord}`).then((data)=>{
             return data.json();
         }).then((ret)=>{
-            if(ret.flag==1){
-                history.push('/',{abc:'123'})
+            if(ret.flag===1){
+                history.push('/Home')
             }
             else{
                 alert('输入错误');
@@ -23,8 +24,11 @@ class Login extends  React.Component{
     }
     render(){
         return(
-            <div>
-                <label htmlFor="userAccount">账号:</label><input name='userAccount' type="text" ref={this.refuserAccount}/>
+            <div className='login-contain'>
+                <div className='login-title'>登录</div>
+                {/* <label htmlFor="userAccount">账号:</label> */}
+                <Input icon='users' iconPosition='left' placeholder='登录账号' ref={this.refuserAccount}/>
+                {/* <input name='userAccount' type="text" ref={this.refuserAccount}/> */}
                 <label htmlFor="passWord">密码:</label><input name='passWord' type="text" ref={this.refpassWord}/>
                 <button onClick={this.handle}>登录</button>
             </div>
